@@ -20,7 +20,8 @@
   "husky": {
     "hooks": {
       "pre-commit": [
-        "lint"
+        "lint",
+        "type-check"
       ]
     }
   },
@@ -65,6 +66,7 @@
     "npm-run-all2": "^6.1.1",
     "postcss": "^8.4.31",
     "prettier": "^3.0.3",
+    "rollup-plugin-visualizer": "^5.9.2",
     "sass": "^1.69.5",
     "tailwindcss": "^3.3.5",
     "typescript": "~5.2.0",

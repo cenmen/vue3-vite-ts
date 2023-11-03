@@ -5,20 +5,19 @@
 <script setup lang="ts">
 import { ref, watch, nextTick, toRefs } from 'vue';
 import lottie from 'lottie-web';
+import type { AnimationConfigWithPath, AnimationItem } from 'lottie-web';
 
 interface Props {
   animationData: Object;
-  options?: Object;
+  options?: AnimationConfigWithPath;
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  options: () => ({})
-});
+const props = defineProps<Props>();
 
 const { animationData, options } = toRefs(props);
 
-const animationContainerRef = ref(null);
-let lottieInstance = null;
+const animationContainerRef = ref<null | Element>(null);
+let lottieInstance: null | AnimationItem = null;
 
 watch([animationData, animationContainerRef], ([newAnimationData]) => {
   if (!animationContainerRef.value) return;
@@ -27,12 +26,12 @@ watch([animationData, animationContainerRef], ([newAnimationData]) => {
   }
   nextTick(() => {
     lottieInstance = lottie.loadAnimation({
-      container: animationContainerRef.value,
+      container: animationContainerRef.value as Element,
       renderer: 'svg',
-      loop: options.value?.loop || true,
-      autoplay: options.value?.autoplay || true,
+      loop: options?.value?.loop || true,
+      autoplay: options?.value?.autoplay || true,
       animationData: newAnimationData,
-      ...options.value
+      // ...options.value
     });
   });
 });

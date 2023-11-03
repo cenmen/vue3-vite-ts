@@ -38,27 +38,28 @@ import { nextTick, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useRoute, useRouter } from 'vue-router';
 import { cloneDeep } from 'lodash-es';
-import { vOnClickOutside } from '@vueuse/components'
+import { vOnClickOutside } from '@vueuse/components';
 import { useLayoutStore } from '@/stores';
+import type { TabbarItem } from '@/stores';
 
 const router = useRouter();
 const currentRoute = useRoute();
 const layoutStore = useLayoutStore();
 const { tabbarItems } = storeToRefs(layoutStore);
 
-const onClickTagItem = ({ path }) => {
+const onClickTagItem = ({ path }: TabbarItem) => {
   router.push({ path });
 };
 
 // 右键打开
-const onRightClickTagItem = (index) => {
+const onRightClickTagItem = (index: number) => {
   let tabs = cloneDeep(layoutStore.tabbarItems);
   tabs[index].visible = true;
   nextTick(() => layoutStore.$patch({ tabbarItems: tabs }));
 };
 
 // 关闭其他 tag
-const onCloseTagItemOnOther = (index) => {
+const onCloseTagItemOnOther = (index: number) => {
   let tabs = cloneDeep(layoutStore.tabbarItems);
   const activeItemIndex = tabs[index];
   activeItemIndex.active = true;
@@ -69,7 +70,7 @@ const onCloseTagItemOnOther = (index) => {
 };
 
 // 关闭右侧 tag
-const onCloseTagItemOnRight = (index) => {
+const onCloseTagItemOnRight = (index: number) => {
   let tabs = cloneDeep(layoutStore.tabbarItems);
   const activeItemIndex = tabs.findIndex((val) => val.active);
   tabs.splice(index + 1);
@@ -84,7 +85,7 @@ const onCloseTagItemOnRight = (index) => {
 };
 
 // 关闭目标 tag
-const onCloseTagItem = (item) => {
+const onCloseTagItem = (item: TabbarItem) => {
   const tabs = cloneDeep(layoutStore.tabbarItems);
   // 最后一个禁止关闭
   if (tabs.length === 1) return;
@@ -113,11 +114,13 @@ const updateTabbarItems = () => {
   tabs.forEach((tab) => delete tab.active);
   let currentItem = tabs.find((val) => val.path === fullPath);
   if (!currentItem) {
-    currentItem = { path: fullPath, title: meta.title };
+    currentItem = { path: fullPath, title: meta.title as string };
     tabs.push(currentItem);
   }
-  currentItem.active = true;
-  layoutStore.$patch({ tabbarItems: tabs });
+  if (currentItem) {
+    currentItem.active = true;
+    layoutStore.$patch({ tabbarItems: tabs });
+  }
 };
 
 watch(() => currentRoute.fullPath, updateTabbarItems, { immediate: true });
