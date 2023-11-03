@@ -1,0 +1,72 @@
+{
+  "name": "vite-ts",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite --mode dev",
+    "tst": "vite --mode tst",
+    "prod": "vite --mode prod",
+    "preview:dev": "vite preview --mode dev",
+    "preview:tst": "vite preview --mode tst",
+    "preview": "vite preview --mode prod",
+    "build": "run-p type-check \"build-only {@}\" --",
+    "test:e2e": "playwright test",
+    "build-only": "vite build",
+    "prepare": "husky install",
+    "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --max-warnings=0 --ignore-path .gitignore",
+    "format": "prettier --write src/"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": [
+        "lint-staged"
+      ]
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,vue}": "lint"
+  },
+  "dependencies": {
+    "@ant-design/icons-vue": "^7.0.1",
+    "ant-design-vue": "^4.0.6",
+    "axios": "^1.6.0",
+    "dayjs": "^1.11.10",
+    "lodash-es": "^4.17.21",
+    "lottie-web": "^5.12.2",
+    "nanoid": "^5.0.2",
+    "nprogress": "^0.2.0",
+    "pinia": "^2.1.7",
+    "pinia-plugin-persistedstate": "^3.2.0",
+    "qs": "^6.11.2",
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.5"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.39.0",
+    "@rushstack/eslint-patch": "^1.3.3",
+    "@tsconfig/node18": "^18.2.2",
+    "@types/lodash-es": "^4.17.10",
+    "@types/node": "^18.18.5",
+    "@types/nprogress": "^0.2.2",
+    "@types/qs": "^6.9.9",
+    "@vitejs/plugin-vue": "^4.4.0",
+    "@vitejs/plugin-vue-jsx": "^3.0.2",
+    "@vue/eslint-config-prettier": "^8.0.0",
+    "@vue/eslint-config-typescript": "^12.0.0",
+    "@vue/tsconfig": "^0.4.0",
+    "autoprefixer": "^10.4.16",
+    "eslint": "^8.49.0",
+    "eslint-plugin-vue": "^9.17.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.0.2",
+    "npm-run-all2": "^6.1.1",
+    "postcss": "^8.4.31",
+    "prettier": "^3.0.3",
+    "sass": "^1.69.5",
+    "tailwindcss": "^3.3.5",
+    "typescript": "~5.2.0",
+    "vite": "^4.4.11",
+    "vue-tsc": "^1.8.19"
+  }
+}
