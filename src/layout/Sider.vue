@@ -30,7 +30,7 @@
 
 <script setup lang="ts">
 import { computed, reactive, onMounted, watch } from 'vue';
-import { HomeOutlined, UserOutlined, BarsOutlined } from '@ant-design/icons-vue';
+// import { HomeOutlined, UserOutlined, BarsOutlined } from '@ant-design/icons-vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useLayoutStore } from '@/stores';
 
