@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { HomeOutlined } from '@ant-design/icons-vue';
+import Layout from '@/layout/Layout.vue';
 import NotFound from '@/views/404.vue';
 import Forbidden from '@/views/403.vue';
-import homeRouter from './modules/home';
+import Home from '@/views/Home.vue';
 import userRouter from './modules/user';
 import orderRouter from './modules/order';
 
@@ -28,7 +30,20 @@ declare module 'vue-router' {
 export const selfRouters = [userRouter, orderRouter];
 
 const routes = [
-  homeRouter,
+  {
+    path: '/',
+    redirect: '/home',
+    component: Layout,
+    meta: { title: '首页', icon: HomeOutlined, root: true },
+    children: [
+      {
+        name: 'home',
+        path: '/home',
+        component: Home,
+        meta: { title: '首页', isHide: true }
+      }
+    ]
+  },
   {
     path: '/403',
     name: '403',

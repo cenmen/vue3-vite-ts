@@ -29,3 +29,12 @@ coverage
 
 test-results/
 playwright-report/
+stats.html
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

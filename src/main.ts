@@ -1,5 +1,5 @@
 import { createApp } from 'vue';
-import Antd from 'ant-design-vue';
+import { Button, Layout, Popover, Avatar, Row, Menu, Tag, message } from 'ant-design-vue';
 import { createPinia } from 'pinia';
 import type { RouteRecordRaw } from 'vue-router';
 import piniaPluginPersistedState from 'pinia-plugin-persistedstate';
@@ -7,14 +7,23 @@ import './styles/tailwind.css';
 import 'ant-design-vue/dist/reset.css';
 import './styles/antd.css';
 import { getAuthInfo } from './api';
-import App from './App.vue';
 import { selfRouters, router } from './router';
+import App from './App.vue';
 
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedState);
 const app = createApp(App);
+// TreeShaking
+app.use(Button);
+app.use(Layout);
+app.use(Popover);
+app.use(Avatar);
+app.use(Row);
+app.use(Menu);
+app.use(Tag);
+app.config.globalProperties.$message = message;
+
 app.use(pinia);
-app.use(Antd);
 app.use(router);
 
 let isInitRouter = false;

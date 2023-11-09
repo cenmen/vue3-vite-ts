@@ -4,7 +4,7 @@
 
 @layer components {
 	.card-container {
-		@apply p-4 m-2 shadow-lg rounded bg-white;
+		@apply p-4 m-2 shadow-lg rounded bg-white hover:shadow-xl;
 	}
 }
 

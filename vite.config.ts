@@ -1,9 +1,9 @@
 import { fileURLToPath, URL } from 'node:url';
-
 import { defineConfig, loadEnv } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import { visualizer } from 'rollup-plugin-visualizer';
+import { splitVendorChunkPlugin } from 'vite';
 
 interface Config {
   [key: string]: string;
@@ -34,7 +34,7 @@ export default defineConfig(({ mode }) => {
   const { VITE_PORT, VITE_SOURCE_MAP, VITE_REPORT, AUTH_API } = toTransformConfig(env) as ConfigRes;
 
   return {
-    plugins: [vue(), vueJsx(), VITE_REPORT && visualizer()],
+    plugins: [vue(), vueJsx(), splitVendorChunkPlugin(), VITE_REPORT && visualizer()],
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url))
@@ -59,7 +59,13 @@ export default defineConfig(({ mode }) => {
         output: {
           chunkFileNames: 'assets/js/[name]-[hash].js',
           entryFileNames: 'assets/js/[name]-[hash].js',
-          assetFileNames: 'assets/[ext]/[name]-[hash].[ext]'
+          assetFileNames: 'assets/[ext]/[name]-[hash].[ext]',
+          manualChunks(id) {
+            const check = id.match(/(src\/views\/(\w+)\/.*)/);
+            if (check && check[2]) {
+              return `views-${check[2].toLocaleLowerCase()}`;
+            }
+          }
         }
       }
     }

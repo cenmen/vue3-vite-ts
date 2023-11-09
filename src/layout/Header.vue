@@ -6,7 +6,7 @@
 		<div>
 			<a-popover placement="bottomRight">
 				<template #content>
-					<div class="p-2.5">
+					<div>
 						<a-row class="cursor-default" align="middle">
 							<LogoutOutlined />
 							<span class="ml-1">退出登录</span>
