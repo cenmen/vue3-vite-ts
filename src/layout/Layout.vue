@@ -1,7 +1,7 @@
 <template>
   <a-layout :style="{ minHeight: '100vh' }">
     <a-layout-sider :collapsed="siderCollapsed" :trigger="null" collapsible>
-      <div class="flex justify-center items-center p-2.5">
+      <div class="flex justify-center items-center p-2.5 shadow-[2px_0_6px_rgba(0,21,41,0.35)]">
         <img class="w-6" :src="logo" />
         <span v-show="!siderCollapsed" class="text-gray-300 text-base font-medium truncate ml-2"
           >模板管理系统</span
@@ -12,7 +12,7 @@
     <a-layout>
       <Header />
       <Tabbar />
-      <a-layout-content class="overflow-hidden">
+      <a-layout-content class="overflow-hidden bg-[#f0f2f5]">
         <Error v-if="state.isError" />
         <router-view v-else v-slot="{ Component, route }">
           <transition

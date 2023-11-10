@@ -13,7 +13,7 @@
         </template>
         <span>{{ menuItem.title }}</span>
       </a-menu-item>
-      <a-sub-menu v-else :key="menuItem.path" @click="onClickSubMenu(menuItem)">
+      <a-sub-menu v-else :key="`sub-${menuItem.path}`" @click="onClickSubMenu(menuItem)">
         <template #icon>
           <component :is="menuItem.icon" />
         </template>
@@ -24,7 +24,7 @@
           </a-menu-item>
           <a-sub-menu
             v-else
-            :key="subMenuItem.path"
+            :key="`sub-menu-${subMenuItem.path}`"
             @click.stop="onClickSecondSubMenu(subMenuItem)"
           >
             <template #title>{{ subMenuItem.title }}</template>
