@@ -35,7 +35,6 @@ router.beforeEach(async (to) => {
 
     selfRouters.forEach((cur) => {
       const authItem = getAuthItem(cur);
-      console.log('🚀 ~ authItem', authItem);
       router.addRoute(authItem);
     });
     isInitRouter = true;
