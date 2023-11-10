@@ -1,7 +1,7 @@
 <template>
   <a-layout :style="{ minHeight: '100vh' }">
-    <a-layout-sider :collapsed="siderCollapsed" :trigger="null" collapsible>
-      <div class="flex justify-center items-center p-2.5 shadow-[2px_0_6px_rgba(0,21,41,0.35)]">
+    <a-layout-sider class="shadow-[2px_0_6px_rgba(0,21,41,0.35)]" :collapsed="siderCollapsed" :trigger="null" collapsible>
+      <div class="flex justify-center items-center p-2.5">
         <img class="w-6" :src="logo" />
         <span v-show="!siderCollapsed" class="text-gray-300 text-base font-medium truncate ml-2"
           >模板管理系统</span

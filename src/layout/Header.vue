@@ -3,9 +3,10 @@
     class="flex items-center justify-between"
     :style="{ height: '48px', padding: '0 16px', background: 'white' }"
   >
-    <div>
+    <a-space size="middle">
       <MenuUnfoldOutlined @click="onChangeCollapsed" />
-    </div>
+      <Breadcrumb />
+    </a-space>
     <div>
       <a-popover placement="bottomRight">
         <template #content>
@@ -28,6 +29,7 @@
 <script setup lang="ts">
 import { MenuUnfoldOutlined, LogoutOutlined } from '@ant-design/icons-vue';
 import { useLayoutStore } from '@/stores';
+import Breadcrumb from './Breadcrumb.vue';
 
 const layoutStore = useLayoutStore();
 
