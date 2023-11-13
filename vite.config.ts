@@ -4,6 +4,7 @@ import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { splitVendorChunkPlugin } from 'vite';
+import viteCompression from 'vite-plugin-compression';
 
 interface Config {
   [key: string]: string;
@@ -12,6 +13,7 @@ interface Config {
 interface ConfigRes {
   VITE_PORT: number;
   VITE_SOURCE_MAP: boolean;
+  VITE_GZIP: boolean;
   VITE_REPORT: boolean;
   AUTH_API: string;
 }
@@ -31,10 +33,18 @@ const toTransformConfig = (config: Config) => {
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd());
-  const { VITE_PORT, VITE_SOURCE_MAP, VITE_REPORT, AUTH_API } = toTransformConfig(env) as ConfigRes;
+  const { VITE_PORT, VITE_SOURCE_MAP, VITE_GZIP, VITE_REPORT, AUTH_API } = toTransformConfig(
+    env
+  ) as ConfigRes;
 
   return {
-    plugins: [vue(), vueJsx(), splitVendorChunkPlugin(), VITE_REPORT && visualizer()],
+    plugins: [
+      vue(),
+      vueJsx(),
+      splitVendorChunkPlugin(),
+      VITE_GZIP && viteCompression(),
+      VITE_REPORT && visualizer()
+    ],
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url))
@@ -53,6 +63,7 @@ export default defineConfig(({ mode }) => {
       }
     },
     build: {
+      reportCompressedSize: !VITE_GZIP,
       sourcemap: VITE_SOURCE_MAP,
       minify: 'esbuild',
       rollupOptions: {
