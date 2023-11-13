@@ -1,8 +1,10 @@
 <template>
-  <div class="card-container" @click="createError">🍈🍉🍓🍒开发中 - List</div>
-  <div class="card-container" @click="createError">🍈🍉🍓🍒开发中 - List</div>
-  <div class="card-container" @click="createError">🍈🍉🍓🍒开发中 - List</div>
-  <div class="card-container" @click="createError">🍈🍉🍓🍒开发中 - List</div>
+  <div>
+    <div class="card-container" @click="createError">🍈🍉🍓🍒开发中 - List</div>
+    <div class="card-container" @click="createError">🍈🍉🍓🍒开发中 - List</div>
+    <div class="card-container" @click="createError">🍈🍉🍓🍒开发中 - List</div>
+    <div class="card-container" @click="createError">🍈🍉🍓🍒开发中 - List</div>
+  </div>
 </template>
 
 <script setup lang="ts">

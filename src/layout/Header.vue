@@ -18,7 +18,7 @@
           </div>
         </template>
         <a-avatar
-          class="w-8 h-8 hover:scale-125 duration-500 ease-in-out overflow-hidden"
+          class="w-8 h-8 duration-500 ease-in-out overflow-hidden grayscale-[30%] hover:scale-110 hover:grayscale-0"
           src="https://img01.yzcdn.cn/vant/logo.png"
         />
       </a-popover>

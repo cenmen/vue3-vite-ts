@@ -1,6 +1,11 @@
 <template>
   <a-layout :style="{ minHeight: '100vh' }">
-    <a-layout-sider class="shadow-[2px_0_6px_rgba(0,21,41,0.35)]" :collapsed="siderCollapsed" :trigger="null" collapsible>
+    <a-layout-sider
+      class="shadow-[2px_0_6px_rgba(0,21,41,0.35)]"
+      :collapsed="siderCollapsed"
+      :trigger="null"
+      collapsible
+    >
       <div class="flex justify-center items-center p-2.5">
         <img class="w-6" :src="logo" />
         <span v-show="!siderCollapsed" class="text-gray-300 text-base font-medium truncate ml-2"
@@ -12,7 +17,7 @@
     <a-layout>
       <Header />
       <Tabbar />
-      <a-layout-content class="overflow-hidden bg-[#f0f2f5]">
+      <a-layout-content class="overflow-hidden">
         <Error v-if="state.isError" />
         <router-view v-else v-slot="{ Component, route }">
           <transition
